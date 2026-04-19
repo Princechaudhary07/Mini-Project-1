@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <form id="signupForm">
+    <h2>Signup</h2>
+    <input type="text" id="signupName" placeholder="Name">
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
+    <label>
+      <input type="checkbox" onclick="togglePassword('signupPassword')"> Show Password
+    </label>
+    <p id="signupError" class="error"></p>
+    <button type="submit">Signup</button>
+    <a href="./login.html">Already have account? Login</a>
+  </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

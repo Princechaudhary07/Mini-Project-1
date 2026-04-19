@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting</title>
+  <script>
+    let user = localStorage.getItem("loggedInUser");
+    if (user) {
+      window.location.href = "dashboard.html";
+    } else {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
