@@ -5,11 +5,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="top-bar">
+  <div class="logo">Placement Prep</div>
+  <div class="right">
+    <span id="userEmail"></span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
 <div class="container">
-  <h2>Welcome</h2>
-  <p id="userEmail"></p>
-  <button onclick="logout()">Logout</button>
+  <div class="welcome-box">
+    <h2>Welcome<span id="userName"></span></h2>
+    <h3>Boost Your Preparation</h3>
+    <h4>Practice aptitude, coding & interview questions</h4>
+  </div>
+
+
+  <h3 class="section-title">Choose a Company</h3>
+  <div class="companies">
+    <div class="card">
+      <h4>Wipro</h4>
+      <p>Service Based</p>
+      <button onclick="selectCompany('Wipro')">Start</button>
+    </div>
+
+    <div class="card">
+      <h4>Cognizant</h4>
+      <p>IT Services</p>
+      <button onclick="selectCompany('Cognizant')">Start</button>
+    </div>
+
+    <div class="card">
+      <h4>Accenture</h4>
+      <p>Consulting</p>
+      <button onclick="selectCompany('Accenture')">Start</button>
+    </div>
+  </div>
 </div>
 <script src="script.js"></script>
-</body>
+<body class="dashboard"></body>
 </html>

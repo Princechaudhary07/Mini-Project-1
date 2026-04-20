@@ -1,4 +1,3 @@
-
 function togglePassword(id) {
   let input = document.getElementById(id);
   if (input.type === "password") {
@@ -101,4 +100,8 @@ if (userEmail) {
 function logout() {
   localStorage.removeItem("loggedInUser");
   window.location = "login.html";
+}
+
+function selectCompany(company) {
+  alert("Starting preparation for " + company);
 }
