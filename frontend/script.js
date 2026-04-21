@@ -97,11 +97,23 @@ if (userEmail) {
   }
 }
 
+
+
 function logout() {
   localStorage.removeItem("loggedInUser");
   window.location = "login.html";
 }
 
+
+
 function selectCompany(company) {
   alert("Starting preparation for " + company);
 }
+
+
+function goToResume() {
+  window.location = "resume.html";
+}
+
+
+
