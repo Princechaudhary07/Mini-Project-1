@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <button onclick="goBack()">Back</button>
+</div>
+
+<div class="container">
+  <h2>Resume Analyzer</h2>
+
+  <input type="file" id="file">
+  <br><br>
+
+  <button onclick="uploadResume()">Generate</button>
+
+  <h3 id="score"></h3>
+
+  <h4>Strengths</h4>
+  <ul id="strengths"></ul>
+
+  <h4>Weaknesses</h4>
+  <ul id="weaknesses"></ul>
+
+  <h4>Suggestions</h4>
+  <ul id="suggestions"></ul>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

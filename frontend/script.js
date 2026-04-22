@@ -1,13 +1,11 @@
 function togglePassword(id) {
   let input = document.getElementById(id);
-  if (input.type === "password") {
-    input.type = "text";
-  } else {
-    input.type = "password";
-  }
+  input.type = input.type === "password" ? "text" : "password";
 }
 
+
 let signupForm = document.getElementById("signupForm");
+
 if (signupForm) {
   signupForm.onsubmit = function (e) {
     e.preventDefault();
@@ -23,39 +21,32 @@ if (signupForm) {
       error.innerText = "Fill all fields";
       return;
     }
+
     if (password.length < 6) {
       error.innerText = "Password too short";
       return;
     }
 
-    let users = JSON.parse(localStorage.getItem("users"));
-    if (!users) {
-      users = [];
-    }
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    let exists = false;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === email) {
-        exists = true;
-      }
-    }
+    let exists = users.some(user => user.email === email);
+
     if (exists) {
       error.innerText = "User already exists";
       return;
     }
-    let user = {
-      name: name,
-      email: email,
-      password: password
-    };
-    users.push(user);
+
+    users.push({ name, email, password });
     localStorage.setItem("users", JSON.stringify(users));
+
     alert("Signup successful");
     window.location = "login.html";
   };
 }
 
+
 let loginForm = document.getElementById("loginForm");
+
 if (loginForm) {
   loginForm.onsubmit = function (e) {
     e.preventDefault();
@@ -67,16 +58,15 @@ if (loginForm) {
     error.innerText = "";
 
     let users = JSON.parse(localStorage.getItem("users"));
+
     if (!users) {
       error.innerText = "No users found";
       return;
     }
-    let found = false;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === email && users[i].password === password) {
-        found = true;
-      }
-    }
+
+    let found = users.find(
+      user => user.email === email && user.password === password
+    );
 
     if (found) {
       localStorage.setItem("loggedInUser", email);
@@ -87,9 +77,12 @@ if (loginForm) {
   };
 }
 
+
 let userEmail = document.getElementById("userEmail");
+
 if (userEmail) {
   let user = localStorage.getItem("loggedInUser");
+
   if (!user) {
     window.location = "login.html";
   } else {
@@ -97,23 +90,78 @@ if (userEmail) {
   }
 }
 
-
-
 function logout() {
   localStorage.removeItem("loggedInUser");
   window.location = "login.html";
 }
 
 
-
 function selectCompany(company) {
-  alert("Starting preparation for " + company);
+  localStorage.setItem("company", company);
+  window.location = "assessment.html";
 }
-
 
 function goToResume() {
   window.location = "resume.html";
 }
 
+function goBack() {
+  window.location = "dashboard.html";
+}
 
+
+
+async function uploadResume() {
+  let file = document.getElementById("file").files[0];
+
+  if (!file) {
+    alert("Select a file");
+    return;
+  }
+
+  let form = new FormData();
+  form.append("resume", file);
+
+  document.getElementById("score").innerText = "Analyzing...";
+
+  let res = await fetch("http://localhost:5000/upload", {
+    method: "POST",
+    body: form
+  });
+
+  let data = await res.json();
+
+  if (data.error) {
+    alert(data.error);
+    return;
+  }
+
+  document.getElementById("score").innerText = "Score: " + data.score;
+
+  let strengths = document.getElementById("strengths");
+  let weaknesses = document.getElementById("weaknesses");
+  let suggestions = document.getElementById("suggestions");
+
+  strengths.innerHTML = "";
+  weaknesses.innerHTML = "";
+  suggestions.innerHTML = "";
+
+  data.strengths.forEach(item => {
+    let li = document.createElement("li");
+    li.innerText = item;
+    strengths.appendChild(li);
+  });
+
+  data.weaknesses.forEach(item => {
+    let li = document.createElement("li");
+    li.innerText = item;
+    weaknesses.appendChild(li);
+  });
+
+  data.suggestions.forEach(item => {
+    let li = document.createElement("li");
+    li.innerText = item;
+    suggestions.appendChild(li);
+  });
+}
 
