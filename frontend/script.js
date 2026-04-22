@@ -169,6 +169,8 @@ async function uploadResume() {
 function startTest(type) {
   if (type === "aptitude") {
     window.location = "aptitude.html";
+  } else if (type === "coding") {
+    window.location = "coding.html";
   }
 }
 

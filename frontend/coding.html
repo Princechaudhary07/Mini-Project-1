@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coding Test</title>
+   <style>
+    body {
+      font-family: Arial;
+      margin: 20px;
+    }
+    #questionBox {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+    #output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      min-height: 40px;
+    }
+  </style>
+  <link rel="stylesheet" href="coding.css">
+</head>
+<body>
+
+<h2 id="companyName"></h2>
+
+<p id="timer"></p>
+
+<div id="questionBox">
+  <h3 id="questionTitle"></h3>
+  <p id="questionDesc"></p>
+</div>
+
+<select id="language">
+  <option>JavaScript</option>
+  <option>Java</option>
+  <option>Python</option>
+</select>
+
+<textarea id="code" rows="15" cols="80">
+// Write your code here
+</textarea>
+
+<br><br>
+
+<button onclick="runCode()">Run</button>
+<button onclick="submitCode()">Submit</button>
+
+<h3>Output:</h3>
+<pre id="output"></pre>
+
+<script src="coding.js"></script>
+
+</body>
+</html>
