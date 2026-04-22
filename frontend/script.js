@@ -165,3 +165,274 @@ async function uploadResume() {
   });
 }
 
+
+function startTest(type) {
+  if (type === "aptitude") {
+    window.location = "aptitude.html";
+  }
+}
+
+// ================= COMPANY NAME =================
+window.onload = function () {
+  let company = localStorage.getItem("company");
+
+  let companyName = document.getElementById("companyName");
+  if (companyName && company) {
+    companyName.innerText = company + " Assessment";
+  }
+};
+
+// ================= QUESTIONS =================
+let questions = [
+
+  // ===== OOPS (5) =====
+  {
+    q: "Which principle allows using the same function name with different parameters?",
+    options: ["Encapsulation", "Polymorphism", "Inheritance", "Abstraction"],
+    answer: "Polymorphism"
+  },
+  {
+    q: "Which concept hides internal details and shows only functionality?",
+    options: ["Inheritance", "Encapsulation", "Abstraction", "Polymorphism"],
+    answer: "Abstraction"
+  },
+  {
+    q: "Which keyword is used to inherit a class in Java?",
+    options: ["this", "super", "extends", "implements"],
+    answer: "extends"
+  },
+  {
+    q: "Which OOP concept binds data and methods together?",
+    options: ["Encapsulation", "Abstraction", "Inheritance", "Overloading"],
+    answer: "Encapsulation"
+  },
+  {
+    q: "Which type of inheritance is not supported in Java?",
+    options: ["Single", "Multiple", "Multilevel", "Hierarchical"],
+    answer: "Multiple"
+  },
+
+  // ===== DBMS (5) =====
+  {
+    q: "What does DBMS stand for?",
+    options: ["Data Base Management System", "Database Managing System", "Data Management System", "None"],
+    answer: "Data Base Management System"
+  },
+  {
+    q: "Which normal form removes partial dependency?",
+    options: ["1NF", "2NF", "3NF", "BCNF"],
+    answer: "2NF"
+  },
+  {
+    q: "Which SQL command is used to retrieve data?",
+    options: ["INSERT", "UPDATE", "SELECT", "DELETE"],
+    answer: "SELECT"
+  },
+  {
+    q: "Which key uniquely identifies a record?",
+    options: ["Foreign Key", "Primary Key", "Candidate Key", "Super Key"],
+    answer: "Primary Key"
+  },
+  {
+    q: "Which operation combines rows from two tables?",
+    options: ["JOIN", "SELECT", "WHERE", "GROUP BY"],
+    answer: "JOIN"
+  },
+
+  // ===== OS (5) =====
+  {
+    q: "Which scheduling algorithm uses time quantum?",
+    options: ["FCFS", "SJF", "Round Robin", "Priority"],
+    answer: "Round Robin"
+  },
+  {
+    q: "What is the main function of an OS?",
+    options: ["Compile programs", "Manage hardware", "Write code", "Design UI"],
+    answer: "Manage hardware"
+  },
+  {
+    q: "Which memory is fastest?",
+    options: ["RAM", "ROM", "Cache", "Hard Disk"],
+    answer: "Cache"
+  },
+  {
+    q: "Deadlock occurs when?",
+    options: ["Processes wait indefinitely", "Memory is full", "CPU is idle", "None"],
+    answer: "Processes wait indefinitely"
+  },
+  {
+    q: "Which is not an OS?",
+    options: ["Linux", "Windows", "Oracle", "MacOS"],
+    answer: "Oracle"
+  },
+
+  // ===== CN (5) =====
+  {
+    q: "What does IP stand for?",
+    options: ["Internet Protocol", "Internal Protocol", "Input Protocol", "None"],
+    answer: "Internet Protocol"
+  },
+  {
+    q: "Which layer handles routing?",
+    options: ["Transport", "Network", "Data Link", "Application"],
+    answer: "Network"
+  },
+  {
+    q: "Which protocol is used for web browsing?",
+    options: ["FTP", "SMTP", "HTTP", "TCP"],
+    answer: "HTTP"
+  },
+  {
+    q: "Which device connects networks?",
+    options: ["Switch", "Hub", "Router", "Repeater"],
+    answer: "Router"
+  },
+  {
+    q: "Which topology has a central node?",
+    options: ["Bus", "Ring", "Star", "Mesh"],
+    answer: "Star"
+  },
+
+  // ===== VERBAL REASONING (5) =====
+  {
+    q: "Find synonym of 'Happy'",
+    options: ["Sad", "Joyful", "Angry", "Tired"],
+    answer: "Joyful"
+  },
+  {
+    q: "Choose the correct spelling",
+    options: ["Recieve", "Receive", "Receeve", "Recive"],
+    answer: "Receive"
+  },
+  {
+    q: "Antonym of 'Fast'",
+    options: ["Quick", "Rapid", "Slow", "Swift"],
+    answer: "Slow"
+  },
+  {
+    q: "Fill in the blank: She ___ going to school.",
+    options: ["is", "are", "am", "be"],
+    answer: "is"
+  },
+  {
+    q: "Choose correct sentence",
+    options: [
+      "He go to school",
+      "He goes to school",
+      "He going school",
+      "He gone school"
+    ],
+    answer: "He goes to school"
+  },
+
+  // ===== QUANT (5) =====
+  {
+    q: "15 + 25 = ?",
+    options: ["30", "35", "40", "45"],
+    answer: "40"
+  },
+  {
+    q: "20% of 200 = ?",
+    options: ["20", "30", "40", "50"],
+    answer: "40"
+  },
+  {
+    q: "Square of 12 = ?",
+    options: ["124", "144", "154", "164"],
+    answer: "144"
+  },
+  {
+    q: "If x = 5, then 2x + 3 = ?",
+    options: ["10", "13", "15", "8"],
+    answer: "13"
+  },
+  {
+    q: "50 ÷ 5 = ?",
+    options: ["5", "10", "15", "20"],
+    answer: "10"
+  }
+
+];
+
+
+
+
+
+let index = 0;
+let score = 0;
+let time = 1800; // 30 min
+
+function loadQuestion() {
+  let q = questions[index];
+
+  let questionEl = document.getElementById("question");
+  let optionsEl = document.getElementById("options");
+
+  if (!questionEl || !optionsEl) return;
+
+  questionEl.innerText = q.q;
+
+  let optionsHTML = "";
+  q.options.forEach(opt => {
+    optionsHTML += `
+      <div>
+        <input type="radio" name="opt" value="${opt}">
+        ${opt}
+      </div>
+    `;
+  });
+
+  optionsEl.innerHTML = optionsHTML;
+}
+
+function nextQuestion() {
+  let selected = document.querySelector('input[name="opt"]:checked');
+
+  if (selected && selected.value === questions[index].answer) {
+    score++;
+  }
+
+  index++;
+
+  if (index < questions.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  let quizBox = document.getElementById("quizBox");
+  let result = document.getElementById("result");
+
+  if (quizBox) quizBox.style.display = "none";
+
+  if (result) {
+    result.style.display = "block";
+    result.innerText = `Your Score: ${score}/${questions.length}`;
+  }
+}
+
+setInterval(() => {
+  let timerEl = document.getElementById("timer");
+
+  if (!timerEl) return;
+
+  if (time > 0) {
+    time--;
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    let formatted = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+    timerEl.innerText = "Time: " + formatted;
+  } else {
+    showResult();
+  }
+}, 1000);
+
+
+if (document.getElementById("question")) {
+  loadQuestion();
+}

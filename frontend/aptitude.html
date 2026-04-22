@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aptitude Test</title>
+  <style>
+  body {
+  font-family: Arial;
+  text-align: center;
+  background: #121212;
+  color: green;
+}
+.container {
+  margin-top: 50px;
+}
+button {
+  margin-top: 10px;
+  padding: 10px;
+}
+</style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h2>Aptitude Test</h2>
+  <h3 id="timer">Time: 60</h3>
+  <div id="quizBox">
+    <h3 id="question"></h3>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <h2 id="result" style="display:none;"></h2>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
