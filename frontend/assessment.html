@@ -3,11 +3,80 @@
 <head>
   <title>Assessment</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Assessment Page Specific Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 10%;
+      padding: 10px 20px;
+      z-index: 100;
+    }
+    
+    .navbar button {
+      background: #4CAF50;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .navbar button:hover {
+      background: #45a049;
+    }
+    
+    .companies {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    
+    .card {
+      background: white;
+      padding: 25px;
+      width: 220px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card h4 {
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+    
+    .card button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .card button:hover {
+      background: #45a049;
+    }
+  </style>
 </head>
 <body>
 
 <div class="navbar">
-  <button onclick="goBack()">⬅ Back</button>
+  <button onclick="goBack()">Back</button>
 </div>
 
 <div class="container">

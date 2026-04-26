@@ -3,6 +3,79 @@
 <head>
   <title>Resume Analyzer</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Resume Page Specific Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 10%;
+      padding: 10px 20px;
+      z-index: 100;
+    }
+    
+    .navbar button {
+      background: #4CAF50;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .navbar button:hover {
+      background: #45a049;
+    }
+    
+    .container {
+      margin-top: 80px;
+      max-width: 600px;
+    }
+    
+    .container h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .container h3 {
+      color: #2e7d32;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .container h4 {
+      color: #333;
+      font-size: 14px;
+    }
+    
+    #file {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    #score {
+      font-size: 18px;
+      color: #2e7d32;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    
+    ul {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 3px solid #4CAF50;
+    }
+    
+    li {
+      margin: 8px 0;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 

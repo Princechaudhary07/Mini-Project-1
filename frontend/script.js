@@ -1,9 +1,13 @@
+// ================= PASSWORD VISIBILITY TOGGLE =================
+// Toggles password input visibility between text and password type
 function togglePassword(id) {
   let input = document.getElementById(id);
   input.type = input.type === "password" ? "text" : "password";
 }
 
 
+// ================= SIGNUP FORM HANDLER =================
+// Handles user registration with validation and localStorage storage
 let signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -45,6 +49,8 @@ if (signupForm) {
 }
 
 
+// ================= LOGIN FORM HANDLER =================
+// Handles user authentication by validating email and password against stored users
 let loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
@@ -78,6 +84,8 @@ if (loginForm) {
 }
 
 
+// ================= USER SESSION CHECK =================
+// Verifies user is logged in and displays user email on dashboard
 let userEmail = document.getElementById("userEmail");
 
 if (userEmail) {
@@ -90,12 +98,22 @@ if (userEmail) {
   }
 }
 
+// ================= LOGOUT FUNCTION =================
+// Clears user session and redirects to login page
 function logout() {
   localStorage.removeItem("loggedInUser");
   window.location = "login.html";
 }
 
+// ================= BACK BUTTON FUNCTION =================
+// Navigates back to the previous page
+function goBack() {
+  window.history.back();
+}
 
+
+// ================= NAVIGATION FUNCTIONS =================
+// Handles navigation between different pages with data passing
 function selectCompany(company) {
   localStorage.setItem("company", company);
   window.location = "assessment.html";
@@ -105,12 +123,10 @@ function goToResume() {
   window.location = "resume.html";
 }
 
-function goBack() {
-  window.location = "dashboard.html";
-}
 
 
-
+// ================= RESUME UPLOAD AND ANALYSIS =================
+// Uploads resume file to backend API for analysis and displays feedback
 async function uploadResume() {
   let file = document.getElementById("file").files[0];
 
@@ -166,6 +182,8 @@ async function uploadResume() {
 }
 
 
+// ================= TEST NAVIGATION =================
+// Redirects to appropriate test page based on test type
 function startTest(type) {
   if (type === "aptitude") {
     window.location = "aptitude.html";
@@ -174,6 +192,8 @@ function startTest(type) {
   }
 }
 
+// ================= INITIALIZATION ON PAGE LOAD =================
+// Sets company name from localStorage when page loads
 // ================= COMPANY NAME =================
 window.onload = function () {
   let company = localStorage.getItem("company");
@@ -360,10 +380,14 @@ let questions = [
 
 
 
+// ================= QUIZ STATE VARIABLES =================
+// Tracks current question index, accumulated score, and remaining time
 let index = 0;
 let score = 0;
 let time = 1800; // 30 min
 
+// ================= QUIZ FUNCTIONS =================
+// Loads and displays current question with options
 function loadQuestion() {
   let q = questions[index];
 
@@ -387,6 +411,7 @@ function loadQuestion() {
   optionsEl.innerHTML = optionsHTML;
 }
 
+// Moves to next question, validates answer, and updates score
 function nextQuestion() {
   let selected = document.querySelector('input[name="opt"]:checked');
 
@@ -403,6 +428,7 @@ function nextQuestion() {
   }
 }
 
+// Displays final score when quiz is completed
 function showResult() {
   let quizBox = document.getElementById("quizBox");
   let result = document.getElementById("result");
@@ -415,6 +441,8 @@ function showResult() {
   }
 }
 
+// ================= TIMER FUNCTIONALITY =================
+// Countdown timer that updates every second and auto-submits when time runs out
 setInterval(() => {
   let timerEl = document.getElementById("timer");
 
@@ -435,6 +463,8 @@ setInterval(() => {
 }, 1000);
 
 
+// ================= INITIAL QUIZ SETUP =================
+// Loads first question when quiz page is loaded
 if (document.getElementById("question")) {
   loadQuestion();
 }

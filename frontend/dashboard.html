@@ -3,60 +3,186 @@
 <head>
   <title>Dashboard</title>
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="navbar">
-  <div class="left">
-    <button onclick="goToResume()">Resume Screening</button>
-  </div>
 
-  <div class="right">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f2f2f2;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 20%;
+      padding: 0px 40px;
+      display: flex;
+      align-items: center;
+      margin-right: 1300px;
+      gap:1350px;
+      justify-content: space-between;
+    }
+
+
+
+    .navbar button {
+      background: #4CAF50;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      
+    }
+
+    /* Top Bar */
+    .top-bar {
+      top:50px;
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      gap:1340px;
+      
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    /* Main Container */
+    .container {
+      width: 80%;
+      margin: auto;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    /* Welcome Box */
+    .welcome-box {
+      background: #2e7d32;
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .welcome-box h2 {
+      margin: 10px 0;
+      color: white;
+    }
+    .welcome-box h3 {
+      margin: 10px 0;
+      color: white;
+    }
+    .welcome-box p {
+      color: white;
+      font-size: 16px;
+    }
+
+    /* Section Title */
+    .section-title {
+      margin: 20px 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Cards */
+    .companies {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0;
+      gap: 70px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px 20px;
+      width: 240px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h4 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    
+    <button onclick="goToResume()">Resume Screening</button>
     <button onclick="logout()">Logout</button>
   </div>
-</div>
 
-<div class="container">
-  <h2>Welcome</h2>
-  
-</div>
-
-<div class="top-bar">
-  <div class="logo">Placement Prep</div>
-  <div class="right">
-    <span id="userEmail"></span>
-    
-  </div>
-</div>
-
-<div class="container">
-  <div class="welcome-box">
-    <h2>Welcome<span id="userName"></span></h2>
-    <h3>Boost Your Preparation</h3>
-    <h4>Practice aptitude, coding & interview questions</h4>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">Placement Prep</div>
+    <div id="userEmail">abc@123</div>
   </div>
 
+  <!-- Main Content -->
+  <div class="container">
 
-  <h3 class="section-title">Choose a Company</h3>
-  <div class="companies">
-    <div class="card">
-      <h4>Wipro</h4>
-      <p>Service Based</p>
-      <button onclick="selectCompany('Wipro')">Start</button>
+    <div class="welcome-box">
+      <h2>Welcome <span id="userName"></span></h2>
+      <h3>Boost Your Preparation</h3>
+      <p>Practice aptitude, coding & interview questions</p>
     </div>
 
-    <div class="card">
-      <h4>Cognizant</h4>
-      <p>IT Services</p>
-      <button onclick="selectCompany('Cognizant')">Start</button>
-    </div>
+    <div class="section-title">Choose a Company</div>
 
-    <div class="card">
-      <h4>Accenture</h4>
-      <p>Consulting</p>
-      <button onclick="selectCompany('Accenture')">Start</button>
+    <div class="companies">
+
+      <div class="card">
+        <h4>Wipro</h4>
+        <p>Service Based</p>
+        <button onclick="selectCompany('Wipro')">Start</button>
+      </div>
+
+      <div class="card">
+        <h4>Cognizant</h4>
+        <p>IT Services</p>
+        <button onclick="selectCompany('Cognizant')">Start</button>
+      </div>
+
+      <div class="card">
+        <h4>Accenture</h4>
+        <p>Consulting</p>
+        <button onclick="selectCompany('Accenture')">Start</button>
+      </div>
+
     </div>
   </div>
-</div>
-<script src="script.js"></script>
-<body class="dashboard"></body>
+
+  <script src="script.js"></script>
+</body>
 </html>
