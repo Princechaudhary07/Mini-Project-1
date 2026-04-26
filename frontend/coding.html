@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,6 +100,22 @@
       font-size: 18px;
       margin-bottom: 8px;
     }
+
+    /* Difficulty badge */
+    #difficultyBadge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #difficultyBadge.Easy   { background: #d4edda; color: #155724; }
+    #difficultyBadge.Medium { background: #fff3cd; color: #856404; }
+    #difficultyBadge.Hard   { background: #f8d7da; color: #721c24; }
 
     #questionDesc {
       color: #555;
@@ -230,8 +245,9 @@
   </div>
 
   <div id="questionBox">
-    <h3 id="questionTitle">Question Title</h3>
-    <p id="questionDesc">Write your problem description here...</p>
+    <span id="difficultyBadge"></span>
+    <h3 id="questionTitle">Loading question...</h3>
+    <p id="questionDesc"></p>
   </div>
 
   <div class="editor-section">
@@ -264,16 +280,151 @@ function goBack() {
   window.history.back();
 }
 
+// ─── QUESTION BANK (inline — no network call needed) ────────────────────────
+const questions = [
+  {
+    difficulty: "Easy",
+    title: "Reverse a String",
+    description: `Write a function reverseString(s) that takes a string s and returns it reversed.
+
+Examples:
+  reverseString("hello")   → "olleh"
+  reverseString("world")   → "dlrow"
+  reverseString("abcde")   → "edcba"
+
+Constraints:
+  • 1 ≤ s.length ≤ 10⁴
+  • s consists of printable ASCII characters`
+  },
+  {
+    difficulty: "Easy",
+    title: "Find Maximum in Array",
+    description: `Write a function findMax(arr) that returns the largest number in an array of integers.
+
+Examples:
+  findMax([3, 1, 4, 1, 5, 9])  → 9
+  findMax([-2, -5, -1, -8])    → -1
+  findMax([42])                → 42
+
+Constraints:
+  • 1 ≤ arr.length ≤ 10⁵
+  • -10⁹ ≤ arr[i] ≤ 10⁹
+  • Do NOT use built-in max() / Math.max()`
+  },
+  {
+    difficulty: "Medium",
+    title: "Two Sum",
+    description: `Given an array of integers nums and an integer target, return the indices of the two numbers that add up to target.
+
+You may assume exactly one solution exists, and you may not use the same element twice.
+
+Examples:
+  twoSum([2, 7, 11, 15], 9)  → [0, 1]
+  twoSum([3, 2, 4], 6)       → [1, 2]
+  twoSum([3, 3], 6)          → [0, 1]
+
+Constraints:
+  • 2 ≤ nums.length ≤ 10⁴
+  • -10⁹ ≤ nums[i] ≤ 10⁹
+  • Expected time complexity: O(n)`
+  },
+  {
+    difficulty: "Medium",
+    title: "Balanced Parentheses",
+    description: `Write a function isBalanced(s) that returns true if the string s has balanced brackets, false otherwise.
+
+Matching pairs: () [] {}
+
+Examples:
+  isBalanced("()")        → true
+  isBalanced("()[]{}")    → true
+  isBalanced("(]")        → false
+  isBalanced("([)]")      → false
+  isBalanced("{[]}")      → true
+
+Constraints:
+  • 0 ≤ s.length ≤ 10⁴
+  • s consists of '(' ')' '{' '}' '[' ']' only`
+  },
+  {
+    difficulty: "Hard",
+    title: "Longest Substring Without Repeating Characters",
+    description: `Given a string s, find the length of the longest substring that contains no repeating characters.
+
+Examples:
+  lengthOfLongest("abcabcbb")  → 3   // "abc"
+  lengthOfLongest("bbbbb")     → 1   // "b"
+  lengthOfLongest("pwwkew")    → 3   // "wke"
+  lengthOfLongest("")          → 0
+
+Constraints:
+  • 0 ≤ s.length ≤ 5 × 10⁴
+  • s consists of English letters, digits, symbols, and spaces
+  • Expected time complexity: O(n) using the sliding window technique`
+  }
+];
+
+// ─── LOAD RANDOM QUESTION ON PAGE LOAD ──────────────────────────────────────
+document.addEventListener("DOMContentLoaded", function () {
+  // Set company name in header
+  const company = localStorage.getItem("company");
+  const pageTitle = document.getElementById("pageTitle");
+  if (company && pageTitle) {
+    pageTitle.innerText = company + " - Coding Assessment";
+  }
+
+  // Pick a random question and display it — no network call, never fails
+  const q = questions[Math.floor(Math.random() * questions.length)];
+
+  document.getElementById("questionTitle").innerText = q.title;
+  document.getElementById("questionDesc").innerText  = q.description;
+
+  const badge = document.getElementById("difficultyBadge");
+  badge.innerText = q.difficulty;
+  badge.className = q.difficulty;   // Easy / Medium / Hard → CSS colour class
+
+  // ─── TIMER ────────────────────────────────────────────────────────────────
+  let totalSeconds = 30 * 60;   // 30 minutes
+  const timerEl = document.getElementById("timer");
+
+  const interval = setInterval(function () {
+    totalSeconds--;
+
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    timerEl.innerText = "Time Left: " +
+      String(mins).padStart(2, "0") + ":" +
+      String(secs).padStart(2, "0");
+
+    // Turn red and pulse in last 5 minutes
+    if (totalSeconds <= 300) {
+      timerEl.style.background = "#f8d7da";
+      timerEl.style.color      = "#721c24";
+    }
+
+    // Time's up
+    if (totalSeconds <= 0) {
+      clearInterval(interval);
+      timerEl.innerText       = "Time's Up!";
+      timerEl.style.background = "#dc3545";
+      timerEl.style.color      = "white";
+      alert("Time is up! Your test has been submitted automatically.");
+      submitCode();
+    }
+  }, 1000);
+});
+
+// ─── RUN CODE ───────────────────────────────────────────────────────────────
 async function runCode() {
-  let code     = document.getElementById("code").value;
-  let language = document.getElementById("language").value;
-  let question = document.getElementById("questionTitle").innerText;
+  const code     = document.getElementById("code").value;
+  const language = document.getElementById("language").value;
+  const question = document.getElementById("questionTitle").innerText;
 
   if (!code) { alert("Write some code first"); return; }
 
   document.getElementById("output").innerText = "Running...";
 
-  let res = await fetch("http://127.0.0.1:5000/coding/run", {
+  const res = await fetch("http://127.0.0.1:5000/coding/run", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -282,22 +433,23 @@ async function runCode() {
     body: JSON.stringify({ code, language, question })
   });
 
-  let data = await res.json();
+  const data = await res.json();
   document.getElementById("output").innerText =
     "Output: " + data.output + "\n\nFeedback: " + data.feedback;
 }
 
+// ─── SUBMIT CODE ────────────────────────────────────────────────────────────
 async function submitCode() {
-  let code     = document.getElementById("code").value;
-  let language = document.getElementById("language").value;
-  let question = document.getElementById("questionTitle").innerText;
-  let company  = localStorage.getItem("company");
+  const code     = document.getElementById("code").value;
+  const language = document.getElementById("language").value;
+  const question = document.getElementById("questionTitle").innerText;
+  const company  = localStorage.getItem("company");
 
   if (!code) { alert("Write some code first"); return; }
 
   document.getElementById("output").innerText = "Submitting...";
 
-  let res = await fetch("http://127.0.0.1:5000/coding/submit", {
+  const res = await fetch("http://127.0.0.1:5000/coding/submit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -306,23 +458,13 @@ async function submitCode() {
     body: JSON.stringify({ code, language, question, company })
   });
 
-  let data = await res.json();
+  const data = await res.json();
   document.getElementById("output").innerText =
     "Score: " + data.score + "/100" +
     "\nOutput: " + data.output +
     "\nFeedback: " + data.feedback;
 }
-
-// Load and display selected company name
-document.addEventListener("DOMContentLoaded", function() {
-  let company = localStorage.getItem("company");
-  let pageTitle = document.getElementById("pageTitle");
-  if (company && pageTitle) {
-    pageTitle.innerText = company + " - Coding Assessment";
-  }
-});
 </script>
 
 </body>
 </html>
-```
