@@ -280,7 +280,7 @@ function goBack() {
   window.history.back();
 }
 
-// ─── QUESTION BANK (inline — no network call needed) ────────────────────────
+//QUESTION BANK
 const questions = [
   {
     difficulty: "Easy",
@@ -364,7 +364,7 @@ Constraints:
   }
 ];
 
-// ─── LOAD RANDOM QUESTION ON PAGE LOAD ──────────────────────────────────────
+//LOAD RANDOM QUESTION ON PAGE LOAD
 document.addEventListener("DOMContentLoaded", function () {
   // Set company name in header
   const company = localStorage.getItem("company");
@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
     pageTitle.innerText = company + " - Coding Assessment";
   }
 
-  // Pick a random question and display it — no network call, never fails
+  // Pick a random question and display it
   const q = questions[Math.floor(Math.random() * questions.length)];
 
   document.getElementById("questionTitle").innerText = q.title;
@@ -381,9 +381,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const badge = document.getElementById("difficultyBadge");
   badge.innerText = q.difficulty;
-  badge.className = q.difficulty;   // Easy / Medium / Hard → CSS colour class
+  badge.className = q.difficulty;   // Easy / Medium / Hard - CSS colour class
 
-  // ─── TIMER ────────────────────────────────────────────────────────────────
+  //TIMER
   let totalSeconds = 30 * 60;   // 30 minutes
   const timerEl = document.getElementById("timer");
 
@@ -414,7 +414,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-// ─── RUN CODE ───────────────────────────────────────────────────────────────
+//RUN CODE
 async function runCode() {
   const code     = document.getElementById("code").value;
   const language = document.getElementById("language").value;
@@ -438,7 +438,7 @@ async function runCode() {
     "Output: " + data.output + "\n\nFeedback: " + data.feedback;
 }
 
-// ─── SUBMIT CODE ────────────────────────────────────────────────────────────
+//SUBMIT CODE
 async function submitCode() {
   const code     = document.getElementById("code").value;
   const language = document.getElementById("language").value;

@@ -1,10 +1,10 @@
-// ================= PASSWORD VISIBILITY TOGGLE =================
+//PASSWORD VISIBILITY TOGGLE
 function togglePassword(id) {
   let input = document.getElementById(id);
   input.type = input.type === "password" ? "text" : "password";
 }
 
-// ================= SIGNUP FORM HANDLER =================
+//SIGNUP FORM HANDLER
 let signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -44,7 +44,7 @@ if (signupForm) {
   };
 }
 
-// ================= LOGIN FORM HANDLER =================
+//LOGIN FORM HANDLER
 let loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
@@ -75,7 +75,7 @@ if (loginForm) {
   };
 }
 
-// ================= USER SESSION CHECK =================
+//USER SESSION CHECK
 let userEmail = document.getElementById("userEmail");
 
 if (userEmail) {
@@ -87,19 +87,19 @@ if (userEmail) {
   }
 }
 
-// ================= LOGOUT =================
+//LOGOUT
 function logout() {
   localStorage.removeItem("loggedInUser");
   localStorage.removeItem("token");
   window.location = "login.html";
 }
 
-// ================= BACK BUTTON =================
+//BACK BUTTON
 function goBack() {
   window.history.back();
 }
 
-// ================= NAVIGATION =================
+//NAVIGATION
 function selectCompany(company) {
   localStorage.setItem("company", company);
   window.location = "assessment.html";
@@ -109,7 +109,7 @@ function goToResume() {
   window.location = "resume.html";
 }
 
-// ================= RESUME UPLOAD =================
+//RESUME UPLOAD
 async function uploadResume() {
   let file = document.getElementById("file").files[0];
 
@@ -168,7 +168,7 @@ async function uploadResume() {
   });
 }
 
-// ================= TEST NAVIGATION =================
+//TEST NAVIGATION
 function startTest(type) {
   if (type === "aptitude") {
     window.location = "aptitude.html";
@@ -177,7 +177,7 @@ function startTest(type) {
   }
 }
 
-// ================= COMPANY NAME =================
+// COMPANY NAME
 window.onload = function () {
   let company     = localStorage.getItem("company");
   let companyName = document.getElementById("companyName");
@@ -186,7 +186,7 @@ window.onload = function () {
   }
 };
 
-// ================= QUESTIONS =================
+//QUESTIONS
 let questions = [
   { q: "Which principle allows using the same function name with different parameters?", options: ["Encapsulation", "Polymorphism", "Inheritance", "Abstraction"], answer: "Polymorphism" },
   { q: "Which concept hides internal details and shows only functionality?", options: ["Inheritance", "Encapsulation", "Abstraction", "Polymorphism"], answer: "Abstraction" },
@@ -220,7 +220,7 @@ let questions = [
   { q: "50 ÷ 5 = ?", options: ["5", "10", "15", "20"], answer: "10" }
 ];
 
-// ================= QUIZ STATE =================
+//QUIZ STATE
 let index = 0;
 let score = 0;
 let time  = 1800;
