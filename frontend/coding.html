@@ -264,12 +264,53 @@ function goBack() {
   window.history.back();
 }
 
-function runCode() {
-  document.getElementById("output").innerText = "Running code...";
+async function runCode() {
+  let code     = document.getElementById("code").value;
+  let language = document.getElementById("language").value;
+  let question = document.getElementById("questionTitle").innerText;
+
+  if (!code) { alert("Write some code first"); return; }
+
+  document.getElementById("output").innerText = "Running...";
+
+  let res = await fetch("http://127.0.0.1:5000/coding/run", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify({ code, language, question })
+  });
+
+  let data = await res.json();
+  document.getElementById("output").innerText =
+    "Output: " + data.output + "\n\nFeedback: " + data.feedback;
 }
 
-function submitCode() {
-  document.getElementById("output").innerText = "Code submitted!";
+async function submitCode() {
+  let code     = document.getElementById("code").value;
+  let language = document.getElementById("language").value;
+  let question = document.getElementById("questionTitle").innerText;
+  let company  = localStorage.getItem("company");
+
+  if (!code) { alert("Write some code first"); return; }
+
+  document.getElementById("output").innerText = "Submitting...";
+
+  let res = await fetch("http://127.0.0.1:5000/coding/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify({ code, language, question, company })
+  });
+
+  let data = await res.json();
+  document.getElementById("output").innerText =
+    "Score: " + data.score + "/100" +
+    "\nOutput: " + data.output +
+    "\nFeedback: " + data.feedback;
 }
 
 // Load and display selected company name
