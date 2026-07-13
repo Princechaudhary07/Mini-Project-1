@@ -27,12 +27,6 @@ if (signupForm) {
       return;
     }
 
-    let res  = await fetch("http://127.0.0.1:5000/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password })
-    });
-
     let data = await res.json();
 
     if (data.error) {
@@ -57,11 +51,6 @@ if (loginForm) {
 
     error.innerText = "";
 
-    let res  = await fetch("http://127.0.0.1:5000/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
 
     let data = await res.json();
 
@@ -123,14 +112,7 @@ async function uploadResume() {
 
   document.getElementById("score").innerText = "Analyzing...";
 
-  let res = await fetch("http://127.0.0.1:5000/resume/upload", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem("token")
-    },
-    body: form
-  });
-
+ 
   let data = await res.json();
 
   if (data.error) {
