@@ -424,15 +424,6 @@ async function runCode() {
 
   document.getElementById("output").innerText = "Running...";
 
-  const res = await fetch("http://127.0.0.1:5000/coding/run", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + localStorage.getItem("token")
-    },
-    body: JSON.stringify({ code, language, question })
-  });
-
   const data = await res.json();
   document.getElementById("output").innerText =
     "Output: " + data.output + "\n\nFeedback: " + data.feedback;
@@ -449,14 +440,6 @@ async function submitCode() {
 
   document.getElementById("output").innerText = "Submitting...";
 
-  const res = await fetch("http://127.0.0.1:5000/coding/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + localStorage.getItem("token")
-    },
-    body: JSON.stringify({ code, language, question, company })
-  });
 
   const data = await res.json();
   document.getElementById("output").innerText =
