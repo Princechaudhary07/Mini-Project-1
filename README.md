@@ -60,8 +60,6 @@ placement-prep-ai/
 └── README.md                     # This file
 ```
 
-## Installation
-
 ### Prerequisites
 - Node.js (v14 or higher)
 - MongoDB (local or Atlas connection)
@@ -77,16 +75,8 @@ placement-prep-ai/
 2. Install dependencies:
    ```bash
    npm install
-   ```
 
-3. Create a `.env` file in the backend directory with the following variables:
-   ```
-   MONGO_URI=mongodb://localhost:27017/placement-prep
-   PORT=5000
-   JWT_SECRET=your_jwt_secret_key
-   ```
-
-4. Start the server:
+3. Start the server:
    ```bash
    npm start
    ```
@@ -110,49 +100,12 @@ placement-prep-ai/
 
 3. Access the application at `http://localhost:8000`
 
-## API Endpoints
-
-### Authentication (`/auth`)
-- `POST /auth/signup` - Register a new user
-- `POST /auth/login` - Login user
-- `GET /auth/verify` - Verify JWT token
-
-### Coding Challenges (`/coding`)
-- `GET /coding/problems` - Get all coding problems
-- `POST /coding/submit` - Submit a coding solution
-- `GET /coding/submissions` - Get user's submissions
-
-### Resume (`/resume`)
-- `POST /resume/upload` - Upload resume
-- `GET /resume/user` - Get user's resume
-- `PUT /resume/update` - Update resume
-
-## Usage
-
 1. **Sign Up**: Create a new account with email and password
 2. **Login**: Log in with your credentials
 3. **Dashboard**: View your profile and access different sections
 4. **Coding Challenges**: Solve and submit coding problems
 5. **Aptitude Tests**: Take aptitude assessments
 6. **Resume Builder**: Create and manage your resume
-
-## Environment Configuration
-
-Create a `.env` file in the backend directory with the following required variables:
-
-```env
-# Database
-MONGO_URI=your_mongodb_connection_string
-
-# Server
-PORT=5000
-
-# JWT
-JWT_SECRET=your_secret_key_here
-JWT_EXPIRE=7d
-
-# Optional: Add other configurations as needed
-```
 
 ## Security Features
 
@@ -170,19 +123,6 @@ JWT_EXPIRE=7d
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Troubleshooting
-
-### MongoDB Connection Error
-- Ensure MongoDB is running locally or provide a valid Atlas connection string
-- Check the `MONGO_URI` in your `.env` file
-
-### CORS Issues
-- Ensure the frontend is accessing the correct backend URL
-- Verify CORS settings in `server.js` match your deployment environment
-
-### Authentication Issues
-- Clear browser LocalStorage if you encounter persistent login issues
-- Verify `JWT_SECRET` is set correctly in `.env`
 
 ## Future Enhancements
 
@@ -194,11 +134,6 @@ JWT_EXPIRE=7d
 - Interview preparation modules
 - Company-specific question banks
 
-## License
-
-ISC
-
-## Support
 
 For issues and questions, please open an issue in the repository or contact the development team.
 
